@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:calculator/components/button_container.dart';
 
 class CalculatorPage extends StatefulWidget {
   @override
@@ -6,6 +7,28 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
+  List buttons = [
+    'C',
+    ' ',
+    'x',
+    ' ',
+    '7',
+    '8',
+    '9',
+    '-',
+    '4',
+    '5',
+    '6',
+    '+',
+    '1',
+    '2',
+    '3',
+    '=',
+    ' ',
+    '%',
+    '0',
+    '.'
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,24 +50,30 @@ class _CalculatorPageState extends State<CalculatorPage> {
               child: Container(
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  // border: Border.,
                   borderRadius: BorderRadius.only(
                     topLeft: Radius.circular(40),
                     topRight: Radius.circular(40),
                   ),
                   color: Color(0xFF2A2D37),
                 ),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15.0),
-                    color: Color(0xFF282B33),
-                  ),
-                  alignment: Alignment.center,
-                  height: 65.0,
-                  width: 65.0,
-                  child: Text(
-                    '1',
-                    style: TextStyle(fontSize: 25.0),
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 12.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      for (int i = 0; i < 5; i++)
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            for (int j = 0; j < 4; j++)
+                              ButtonContainer(
+                                clr: Color(0xFF9D4D53),
+                                text: buttons[4 * i + j],
+                              ),
+                          ],
+                        ),
+                    ],
                   ),
                 ),
               ),
