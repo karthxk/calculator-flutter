@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ButtonContainer extends StatelessWidget {
-  ButtonContainer({this.text, this.clr});
+  ButtonContainer({this.text, this.clr, this.onTap});
   final text;
   final clr;
+  final onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15.0),

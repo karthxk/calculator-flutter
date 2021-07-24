@@ -1,3 +1,4 @@
+import 'package:calculator/calculator_brain.dart';
 import 'package:flutter/material.dart';
 import 'package:calculator/components/button_container.dart';
 
@@ -9,28 +10,28 @@ class CalculatorPage extends StatefulWidget {
 class _CalculatorPageState extends State<CalculatorPage> {
   List buttons = [
     'C',
-    '÷',
-    'x',
+    ' ÷ ',
+    ' × ',
     '⌫',
     '7',
     '8',
     '9',
-    '-',
+    ' - ',
     '4',
     '5',
     '6',
-    '+',
+    ' + ',
     '1',
     '2',
     '3',
-    'mod',
-    '%',
+    ' mod ',
+    ' % ',
     '0',
     '.',
     '='
   ];
-  int total = 0;
-  String input = '';
+
+  CalculatorBrain calculatorBrain = CalculatorBrain();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,19 +44,29 @@ class _CalculatorPageState extends State<CalculatorPage> {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  alignment: Alignment.bottomRight,
+                  // alignment: Alignment.bottomRight,
                   color: Color(0xFF22252D),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Container(
-                        child: Text(
-                          input,
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          alignment: Alignment.centerRight,
+                          child: Text(
+                            calculatorBrain.input,
+                            style: TextStyle(
+                              fontSize: 30.0,
+                              color: Color(0x50FFFFFF),
+                            ),
+                          ),
                         ),
                       ),
                       Container(
                         child: Text(
-                          '$total',
+                          '${calculatorBrain.total}',
+                          textAlign: TextAlign.end,
                           style: TextStyle(
                             fontSize: 80.0,
                           ),
@@ -91,6 +102,12 @@ class _CalculatorPageState extends State<CalculatorPage> {
                               ButtonContainer(
                                 clr: Color(0xFF9D4D53),
                                 text: buttons[4 * i + j],
+                                onTap: () {
+                                  setState(() {
+                                    calculatorBrain
+                                        .assignFunction(buttons[4 * i + j]);
+                                  });
+                                },
                               ),
                           ],
                         ),
