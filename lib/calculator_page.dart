@@ -9,9 +9,9 @@ class CalculatorPage extends StatefulWidget {
 class _CalculatorPageState extends State<CalculatorPage> {
   List buttons = [
     'C',
-    ' ',
+    '÷',
     'x',
-    ' ',
+    '⌫',
     '7',
     '8',
     '9',
@@ -23,12 +23,14 @@ class _CalculatorPageState extends State<CalculatorPage> {
     '1',
     '2',
     '3',
-    '=',
-    ' ',
+    'mod',
     '%',
     '0',
-    '.'
+    '.',
+    '='
   ];
+  int total = 0;
+  String input = '';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,10 +40,29 @@ class _CalculatorPageState extends State<CalculatorPage> {
           children: [
             Expanded(
               flex: 2,
-              child: Container(
-                color: Color(0xFF22252D),
-                child: Text(
-                  'hello',
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  alignment: Alignment.bottomRight,
+                  color: Color(0xFF22252D),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        child: Text(
+                          input,
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          '$total',
+                          style: TextStyle(
+                            fontSize: 80.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
