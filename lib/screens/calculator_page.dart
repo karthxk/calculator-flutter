@@ -24,8 +24,8 @@ class _CalculatorPageState extends State<CalculatorPage> {
     '1',
     '2',
     '3',
-    ' mod ',
     ' % ',
+    '00',
     '0',
     '.',
     '='
@@ -84,14 +84,17 @@ class _CalculatorPageState extends State<CalculatorPage> {
                           ),
                         ),
                       ),
-                      Container(
-                        child: Text(
-                          calculatorBrain.display.length == 0
-                              ? '0'
-                              : calculatorBrain.display,
-                          textAlign: TextAlign.end,
-                          style: TextStyle(
-                            fontSize: 80.0,
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          child: Text(
+                            calculatorBrain.total.length == 0
+                                ? ''
+                                : calculatorBrain.total,
+                            textAlign: TextAlign.end,
+                            style: TextStyle(
+                              fontSize: 65.0,
+                            ),
                           ),
                         ),
                       ),

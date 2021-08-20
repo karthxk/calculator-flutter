@@ -1,6 +1,8 @@
+import 'package:math_expressions/math_expressions.dart';
+
 class CalculatorBrain {
-  double total = 0;
-  String display = '';
+  String total = '';
+
   String input = '';
   String previousKey = '';
   bool arithmetic = false;
@@ -15,14 +17,13 @@ class CalculatorBrain {
         pressedKey == '7' ||
         pressedKey == '8' ||
         pressedKey == '9' ||
+        pressedKey == '00' ||
         pressedKey == '.') {
-      display = display + pressedKey;
       previousKey = pressedKey;
       arithmetic = false;
       appendToString(pressedKey);
     } else if (pressedKey == ' + ' ||
         pressedKey == ' - ' ||
-        pressedKey == ' mod ' ||
         pressedKey == ' % ' ||
         pressedKey == ' ÷ ' ||
         pressedKey == ' × ') {
@@ -39,11 +40,13 @@ class CalculatorBrain {
       input = '';
       arithmetic = false;
       previousKey = '';
-      display = '';
+      total = '';
     } else if (pressedKey == '⌫' && input.length != 0) {
       input = input.substring(0, input.length - previousKey.length);
       previousKey = pressedKey;
       arithmetic = false;
+    } else if (pressedKey == '=') {
+      calculation();
     }
   }
 
@@ -51,5 +54,14 @@ class CalculatorBrain {
     input = input + pressedKey;
   }
 
-  void calculation() {}
+  void calculation() {
+    total = input.replaceAll("÷", "/").replaceAll("×", "*");
+    print(total);
+    Parser p = Parser();
+    Expression exp = p.parse(total);
+    ContextModel cm = ContextModel();
+    double eval = exp.evaluate(EvaluationType.REAL, cm);
+    total = eval.toString();
+    print(eval);
+  }
 }
