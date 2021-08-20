@@ -8,7 +8,7 @@ class CalculatorPage extends StatefulWidget {
 }
 
 class _CalculatorPageState extends State<CalculatorPage> {
-  List buttons = [
+  List<String> buttons = [
     'C',
     ' ÷ ',
     ' × ',
@@ -30,7 +30,28 @@ class _CalculatorPageState extends State<CalculatorPage> {
     '.',
     '='
   ];
-
+  List<Color> buttonColors = [
+    Color(0xFF40C3AF),
+    Color(0xFF40C3AF),
+    Color(0xFF40C3AF),
+    Color(0xFF9D4D53),
+    Color(0xFFFFFFFF),
+    Color(0xFFFFFFFF),
+    Color(0xFFFFFFFF),
+    Color(0xFF9D4D53),
+    Color(0xFFFFFFFF),
+    Color(0xFFFFFFFF),
+    Color(0xFFFFFFFF),
+    Color(0xFF9D4D53),
+    Color(0xFFFFFFFF),
+    Color(0xFFFFFFFF),
+    Color(0xFFFFFFFF),
+    Color(0xFF9D4D53),
+    Color(0xFFFFFFFF),
+    Color(0xFFFFFFFF),
+    Color(0xFFFFFFFF),
+    Color(0xFF9D4D53),
+  ];
   CalculatorBrain calculatorBrain = CalculatorBrain();
   @override
   Widget build(BuildContext context) {
@@ -65,7 +86,9 @@ class _CalculatorPageState extends State<CalculatorPage> {
                       ),
                       Container(
                         child: Text(
-                          '${calculatorBrain.total}',
+                          calculatorBrain.display.length == 0
+                              ? '0'
+                              : calculatorBrain.display,
                           textAlign: TextAlign.end,
                           style: TextStyle(
                             fontSize: 80.0,
@@ -100,7 +123,7 @@ class _CalculatorPageState extends State<CalculatorPage> {
                           children: [
                             for (int j = 0; j < 4; j++)
                               ButtonContainer(
-                                clr: Color(0xFF9D4D53),
+                                clr: buttonColors[4 * i + j],
                                 text: buttons[4 * i + j],
                                 onTap: () {
                                   setState(() {

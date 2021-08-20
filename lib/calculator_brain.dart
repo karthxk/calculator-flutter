@@ -1,8 +1,9 @@
 class CalculatorBrain {
   double total = 0;
+  String display = '';
   String input = '';
   String previousKey = '';
-  bool arith = false;
+  bool arithmetic = false;
   void assignFunction(String pressedKey) {
     if (pressedKey == '0' ||
         pressedKey == '1' ||
@@ -15,8 +16,9 @@ class CalculatorBrain {
         pressedKey == '8' ||
         pressedKey == '9' ||
         pressedKey == '.') {
+      display = display + pressedKey;
       previousKey = pressedKey;
-      arith = false;
+      arithmetic = false;
       appendToString(pressedKey);
     } else if (pressedKey == ' + ' ||
         pressedKey == ' - ' ||
@@ -25,27 +27,29 @@ class CalculatorBrain {
         pressedKey == ' ÷ ' ||
         pressedKey == ' × ') {
       if (pressedKey != previousKey) {
-        if (arith == false) {
+        if (arithmetic == false) {
           appendToString(pressedKey);
           previousKey = pressedKey;
-          arith = true;
+          arithmetic = true;
         } else {
           input = input.substring(0, input.length - 3) + pressedKey;
         }
       }
     } else if (pressedKey == 'C') {
       input = '';
-      arith = false;
+      arithmetic = false;
       previousKey = '';
+      display = '';
     } else if (pressedKey == '⌫' && input.length != 0) {
       input = input.substring(0, input.length - previousKey.length);
       previousKey = pressedKey;
-      arith = false;
-      // print(input[input.length - 1]);
+      arithmetic = false;
     }
   }
 
   void appendToString(String pressedKey) {
     input = input + pressedKey;
   }
+
+  void calculation() {}
 }
