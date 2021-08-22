@@ -42,7 +42,10 @@ class CalculatorBrain {
       previousKey = '';
       total = '';
     } else if (pressedKey == '⌫' && input.length != 0) {
-      input = input.substring(0, input.length - previousKey.length);
+      // input = input.substring(0, input.length - previousKey.length);
+      input = (input[input.length - 1] == ' ')
+          ? input.substring(0, input.length - 3)
+          : input.substring(0, input.length - 1);
       previousKey = pressedKey;
       arithmetic = false;
     } else if (pressedKey == '=') {
@@ -60,8 +63,14 @@ class CalculatorBrain {
     Parser p = Parser();
     Expression exp = p.parse(total);
     ContextModel cm = ContextModel();
-    double eval = exp.evaluate(EvaluationType.REAL, cm);
-    total = eval.toString();
-    print(eval);
+    try {
+      double eval = exp.evaluate(EvaluationType.REAL, cm);
+      total = eval.toString();
+      print(eval);
+      // throw ('Error');
+
+    } catch (e) {
+      total = 'Error';
+    }
   }
 }
